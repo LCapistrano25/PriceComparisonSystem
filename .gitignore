@@ -417,5 +417,5 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
-# Db
+# BD
 db.sqlite3
