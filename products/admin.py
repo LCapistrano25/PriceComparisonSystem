@@ -1,6 +1,6 @@
 from django.contrib import admin
 from core.mixins.admin import AuditAdminMixin
-from products.models import Product, ProductPlatform, PriceAlert
+from products.models import Product, ProductPlatform, PriceAlert, PriceHistory
 
 @admin.register(Product)
 class ProductAdmin(AuditAdminMixin, admin.ModelAdmin):
@@ -49,3 +49,21 @@ class PriceAlertAdmin(AuditAdminMixin, admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+
+@admin.register(PriceHistory)
+class PriceHistoryAdmin(AuditAdminMixin, admin.ModelAdmin):
+    list_display = ['id', 'product_platform', 'price', 'last_checked_at', 'created_at', 'updated_at']
+    search_fields = ['product_platform__product__name']
+    list_filter = ['created_at', 'updated_at']
+
+    fieldsets = (
+        (None, {
+            'fields': ('product_platform', 'price', 'last_checked_at')
+        }),
+        ('Audit', {
+            'fields': ('created_at', 'created_by', 'updated_at', 'updated_by'),
+            'classes': ('collapse',)
+        }),
+    )
+
+    readonly_fields = ('product_platform', 'price', 'last_checked_at', 'created_at', 'created_by', 'updated_at', 'updated_by')
