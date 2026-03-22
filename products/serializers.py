@@ -1,4 +1,3 @@
-from pyexpat import model
 from rest_framework import serializers
 from core.mixins.serializers import AuditSerializerMixin
 from products.models import Product, ProductPlatform, PriceAlert
