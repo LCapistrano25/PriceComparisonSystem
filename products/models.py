@@ -102,3 +102,6 @@ class PriceAlert(BaseModel):
         db_table = 'tb_alerta_preco'
         verbose_name = 'Alerta de Preço'
         verbose_name_plural = 'Alertas de Preço'
+
+    def __str__(self):
+        return f"{self.product_platform.product.name} - {self.channel}"

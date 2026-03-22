@@ -14,3 +14,9 @@ class ProductPlatformSerializer(serializers.ModelSerializer, AuditSerializerMixi
     class Meta:
         model = ProductPlatform
         fields = ['id', 'product', 'platform', 'url', 'created_at', 'updated_at']
+
+class PriceAlertSerializer(serializers.ModelSerializer, AuditSerializerMixin):
+
+    class Meta:
+        model = PriceAlert
+        fields = ['id', 'product_platform', 'channel', 'min_price', 'max_price', 'created_at', 'updated_at']
