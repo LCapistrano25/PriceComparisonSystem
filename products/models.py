@@ -23,6 +23,9 @@ class Product(BaseModel):
         verbose_name = 'Produto'
         verbose_name_plural = 'Produtos'
 
+    def __str__(self):
+        return self.name
+
 class ProductPlatform(BaseModel):
     """
     Classe para definição de plataformas de produtos
@@ -52,6 +55,9 @@ class ProductPlatform(BaseModel):
         db_table = 'tb_produto_plataforma'
         verbose_name = 'Plataforma de Produto'
         verbose_name_plural = 'Plataformas de Produtos'
+
+    def __str__(self):
+        return f"{self.product.name} - {self.platform}"
 
 class PriceAlert(BaseModel):
     """
@@ -96,3 +102,6 @@ class PriceAlert(BaseModel):
         db_table = 'tb_alerta_preco'
         verbose_name = 'Alerta de Preço'
         verbose_name_plural = 'Alertas de Preço'
+
+    def __str__(self):
+        return f"{self.product_platform.product.name} - {self.channel}"
