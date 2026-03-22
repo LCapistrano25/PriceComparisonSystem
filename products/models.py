@@ -23,6 +23,9 @@ class Product(BaseModel):
         verbose_name = 'Produto'
         verbose_name_plural = 'Produtos'
 
+    def __str__(self):
+        return self.name
+        
 class ProductPlatform(BaseModel):
     """
     Classe para definição de plataformas de produtos
