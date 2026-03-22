@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from core.mixins.serializers import AuditSerializerMixin
-from products.models import Product, ProductPlatform, PriceAlert
+from products.models import Product, ProductPlatform, PriceAlert, PriceHistory
 
 class ProductSerializer(serializers.ModelSerializer, AuditSerializerMixin):
 
@@ -19,3 +19,9 @@ class PriceAlertSerializer(serializers.ModelSerializer, AuditSerializerMixin):
     class Meta:
         model = PriceAlert
         fields = ['id', 'product_platform', 'channel', 'min_price', 'max_price', 'created_at', 'updated_at']
+
+class PriceHistorySerializer(serializers.ModelSerializer, AuditSerializerMixin):
+
+    class Meta:
+        model = PriceHistory
+        fields = ['id', 'product_platform', 'price', 'last_checked_at', 'created_at', 'updated_at']
