@@ -51,6 +51,18 @@ class ProductPlatform(BaseModel):
         verbose_name='URL'
     )
 
+    current_price = models.DecimalField(
+        max_digits=10, 
+        decimal_places=2, 
+        db_column='preco_atual', 
+        verbose_name='Preço Atual'
+    )
+
+    last_checked_at = models.DateField(
+        db_column='ultima_verificacao', 
+        verbose_name='Última Verificação'
+    )
+
     class Meta:
         db_table = 'tb_produto_plataforma'
         verbose_name = 'Plataforma de Produto'
