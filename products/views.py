@@ -2,8 +2,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 from core.permissions.default import GlobalDefaulPermission
-from products.serializers import ProductSerializer, ProductPlatformSerializer, PriceAlertSerializer
-from products.models import Product, ProductPlatform, PriceAlert
+from products.serializers import ProductSerializer, ProductPlatformSerializer, PriceAlertSerializer, PriceHistorySerializer
+from products.models import Product, ProductPlatform, PriceAlert, PriceHistory
 
 class ProductListCreateView(ListCreateAPIView):
     permission_classes = [IsAuthenticated, GlobalDefaulPermission]
@@ -34,3 +34,13 @@ class PriceAlertRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated, GlobalDefaulPermission]
     queryset = PriceAlert.objects.all()
     serializer_class = PriceAlertSerializer
+
+class PriceHistoryListCreateView(ListCreateAPIView):
+    permission_classes = [IsAuthenticated, GlobalDefaulPermission]
+    queryset = PriceHistory.objects.all()
+    serializer_class = PriceHistorySerializer
+
+class PriceHistoryRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated, GlobalDefaulPermission]
+    queryset = PriceHistory.objects.all()
+    serializer_class = PriceHistorySerializer

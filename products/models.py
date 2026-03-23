@@ -105,3 +105,35 @@ class PriceAlert(BaseModel):
 
     def __str__(self):
         return f"{self.product_platform.product.name} - {self.channel}"
+
+class PriceHistory(BaseModel):
+    """
+    Classe para definição de histórico de preços
+    """
+    product_platform = models.ForeignKey(
+        ProductPlatform, 
+        related_name='price_history', 
+        on_delete=models.CASCADE, 
+        db_column='id_produto_plataforma', 
+        verbose_name='Plataforma de Produto'
+    )
+
+    price = models.DecimalField(
+        max_digits=10, 
+        decimal_places=2, 
+        db_column='preco', 
+        verbose_name='Preço'
+    )
+
+    last_checked_at = models.DateField(
+        db_column='data_verificacao', 
+        verbose_name='Data de Verificação'
+    )
+
+    class Meta:
+        db_table = 'tb_historico_preco'
+        verbose_name = 'Histórico de Preço'
+        verbose_name_plural = 'Históricos de Preço'
+
+    def __str__(self):
+        return f"{self.product_platform.product.name} - {self.last_checked_at}"

@@ -6,6 +6,8 @@ from products.views import (
     ProductPlatformRetrieveUpdateDestroyView,
     PriceAlertListCreateView,
     PriceAlertRetrieveUpdateDestroyView,
+    PriceHistoryListCreateView,
+    PriceHistoryRetrieveUpdateDestroyView,
 )
 
 urlpatterns = [
@@ -15,4 +17,6 @@ urlpatterns = [
     path('products/platforms/<int:pk>/', ProductPlatformRetrieveUpdateDestroyView.as_view(), name='product-platform-retrieve-update-destroy'),
     path('products/alerts/', PriceAlertListCreateView.as_view(), name='price-alert-list-create'),
     path('products/alerts/<int:pk>/', PriceAlertRetrieveUpdateDestroyView.as_view(), name='price-alert-retrieve-update-destroy'),
+    path('products/history/', PriceHistoryListCreateView.as_view(), name='price-history-list-create'),
+    path('products/history/<int:pk>/', PriceHistoryRetrieveUpdateDestroyView.as_view(), name='price-history-retrieve-update-destroy'),
 ]
