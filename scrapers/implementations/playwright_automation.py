@@ -1,5 +1,5 @@
 import asyncio
-from interfaces.base.automation import AsyncAutomationInterface
+from scrapers.interfaces.base.automation import AsyncAutomationInterface
 from playwright.async_api import async_playwright
 
 class AsyncPlaywrightAutomation(AsyncAutomationInterface):
