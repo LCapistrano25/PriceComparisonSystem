@@ -1,6 +1,7 @@
 from datetime import datetime
-from interfaces.base.automation import AsyncAutomationInterface
-from interfaces.platforms.platform import AsyncPlatformInterface
+from scrapers.interfaces.base.automation import AsyncAutomationInterface
+from scrapers.interfaces.platforms.platform import AsyncPlatformInterface
+from core.utils.format_values import parse_price
 
 XPATH_CONTAINER = "//span[contains(@class, 'ui-pdp-price__part__container')]"
 
@@ -15,7 +16,7 @@ class AsyncMercadoLibrePlatform(AsyncPlatformInterface):
             price_text = await self.automation.get_text(XPATH_CONTAINER)
             return {
                 'platform': 'Mercado Livre',
-                'price': price_text.replace('\n', '').strip(),
+                'price': parse_price(price_text.replace('\n', '').strip()),
                 'consult_date': datetime.now().strftime('%d/%m/%Y %H:%M:%S')
             }
         except Exception as e:
