@@ -7,13 +7,12 @@ from core.utils.format_values import parse_price
 XPATH_CONTAINER = "//span[contains(@class, 'a-price aok-align-center reinventPricePriceToPayMargin priceToPay apex-pricetopay-value')]"
 
 class AsyncAmazonPlatform(AsyncPlatformInterface):
-    def __init__(self, automation: AsyncAutomationInterface, url: str) -> None:
+    def __init__(self, automation: AsyncAutomationInterface) -> None:
         self.automation = automation
-        self.url = url
 
-    async def execute(self) -> dict:
+    async def get_info(self, url: str) -> dict:
         try:
-            await self.automation.start(self.url)
+            await self.automation.start(url)
             price_text = await self.automation.get_text(XPATH_CONTAINER)
             return {
                 'platform': 'Amazon',

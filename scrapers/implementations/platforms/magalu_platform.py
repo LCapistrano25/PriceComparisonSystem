@@ -6,13 +6,13 @@ from core.utils.format_values import parse_price
 XPATH_CONTAINER = "[id^='price-final-label']"
 
 class AsyncMagaluPlatform(AsyncPlatformInterface):
-    def __init__(self, automation: AsyncAutomationInterface, url: str):
+    def __init__(self, automation: AsyncAutomationInterface):
         self.automation = automation
         self.url = url
 
-    async def execute(self):
+    async def get_info(self, url: str) -> dict:
         try:            
-            await self.automation.start(self.url)
+            await self.automation.start(url)
             price_text = await self.automation.get_text(XPATH_CONTAINER)
             return {
                 'platform': 'Magalu',
