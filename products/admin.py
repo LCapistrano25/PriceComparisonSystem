@@ -26,7 +26,7 @@ class ProductPlatformAdmin(AuditAdminMixin, admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('product', 'platform', 'url')
+            'fields': ('product', 'platform', 'url', 'current_price', 'last_checked_at')
         }),
         ('Audit', {
             'fields': ('created_at', 'created_by', 'updated_at', 'updated_by'),
