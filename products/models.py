@@ -58,7 +58,7 @@ class ProductPlatform(BaseModel):
         verbose_name='Preço Atual'
     )
 
-    last_checked_at = models.DateField(
+    last_checked_at = models.DateTimeField(
         db_column='ultima_verificacao', 
         verbose_name='Última Verificação'
     )
@@ -137,7 +137,7 @@ class PriceHistory(BaseModel):
         verbose_name='Preço'
     )
 
-    last_checked_at = models.DateField(
+    last_checked_at = models.DateTimeField(
         db_column='data_verificacao', 
         verbose_name='Data de Verificação'
     )

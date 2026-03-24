@@ -19,7 +19,7 @@ class PlatformFactory:
         if platform == Platform.MAGALU:
             return AsyncMagaluPlatform(self.automation)
 
-        if platform == Platform.MERCADO_LIVRE:
+        if platform == Platform.MERCADOLIVRE:
             return AsyncMercadoLibrePlatform(self.automation)
 
         raise ValueError("Plataforma inválida")

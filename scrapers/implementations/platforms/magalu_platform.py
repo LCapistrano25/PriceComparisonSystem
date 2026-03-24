@@ -8,7 +8,6 @@ XPATH_CONTAINER = "[id^='price-final-label']"
 class AsyncMagaluPlatform(AsyncPlatformInterface):
     def __init__(self, automation: AsyncAutomationInterface):
         self.automation = automation
-        self.url = url
 
     async def get_info(self, url: str) -> dict:
         try:            
