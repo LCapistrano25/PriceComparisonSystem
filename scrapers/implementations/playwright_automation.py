@@ -10,9 +10,9 @@ class AsyncPlaywrightAutomation(AsyncAutomationInterface):
     
     async def start(self, url: str) -> None:
         self.playwright = await async_playwright().start()
-        self.browser = await self.playwright.chromium.launch(headless=False)
+        self.browser = await self.playwright.chromium.launch(headless=True)
         self.context = await self.browser.new_context(
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+            user_agent="Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
         )
         self.page = await self.context.new_page()
         await self.page.goto(url, timeout=60000, wait_until="domcontentloaded")
