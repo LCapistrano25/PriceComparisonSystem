@@ -9,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SECRET_KEY: "dummy-secret-key-for-build-check"
+      DEBUG: "False"
 
     steps:
     - uses: actions/checkout@v4
@@ -32,6 +35,3 @@ jobs:
 
     - name: Run collectstatic (build test)
       run: uv run python manage.py collectstatic --noinput --clear
-      env:
-        SECRET_KEY: "dummy-secret-key-for-build-check"
-        DEBUG: "False"
