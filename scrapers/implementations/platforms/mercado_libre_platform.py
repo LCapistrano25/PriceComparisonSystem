@@ -1,4 +1,7 @@
-from datetime import datetime
+from core.utils.logger import Log
+from scrapers.database.exceptions.exception import ExceptionModel
+from scrapers.database.price_collected import PriceCollected
+
 from scrapers.interfaces.base.automation import AsyncAutomationInterface
 from scrapers.interfaces.platforms.platform import AsyncPlatformInterface
 from core.utils.format_values import parse_price
@@ -10,19 +13,19 @@ class AsyncMercadoLibrePlatform(AsyncPlatformInterface):
         self.automation = automation
 
     async def get_info(self, url: str) -> dict:
+        Log.info(f"Iniciando coleta no Mercado Livre: {url}", __name__)
         try:            
             await self.automation.start(url)
             price_text = await self.automation.get_text(XPATH_CONTAINER)
-            return {
-                'platform': 'Mercado Livre',
-                'price': parse_price(price_text.replace('\n', '').strip()),
-                'consult_date': datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-            }
+            price = parse_price(price_text.replace('\n', '').strip())
+            
+            Log.info(f"Coleta finalizada com sucesso no Mercado Livre. Preço: {price}", __name__)
+            return PriceCollected(platform='Mercado Livre', price=price).to_dict()
+
         except Exception as e:
-            print(f"Ocorreu um erro: {e}")
-            return {
-                'error': e
-            }
+            Log.error(f"Erro ao coletar dados no Mercado Livre ({url}): {str(e)}", __name__, exc_info=True)
+            return ExceptionModel(error=str(e)).to_dict()
+            
         finally:
             await self.automation.stop()
             
