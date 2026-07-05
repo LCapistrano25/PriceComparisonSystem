@@ -1,16 +1,17 @@
 import asyncio
-from scrapers.interfaces.base.automation import AsyncAutomationInterface
+from scrapers.interfaces.automation import AsyncAutomationInterface
 from playwright.async_api import async_playwright
 
 class AsyncPlaywrightAutomation(AsyncAutomationInterface):
-    def __init__(self) -> None:
+    def __init__(self, headless: bool = True) -> None:
         self.browser = None
         self.context = None
         self.page = None
+        self.headless = headless
     
     async def start(self, url: str) -> None:
         self.playwright = await async_playwright().start()
-        self.browser = await self.playwright.chromium.launch(headless=True)
+        self.browser = await self.playwright.chromium.launch(headless=self.headless)
         self.context = await self.browser.new_context(
             user_agent="Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
         )
