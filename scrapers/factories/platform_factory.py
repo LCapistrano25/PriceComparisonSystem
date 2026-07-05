@@ -1,10 +1,10 @@
 from core.enums.platforms import Platform
 
-from scrapers.interfaces.base.automation import AsyncAutomationInterface
+from scrapers.interfaces.automation import AsyncAutomationInterface
 
-from scrapers.implementations.platforms.amazon_platform import AsyncAmazonPlatform
-from scrapers.implementations.platforms.mercado_libre_platform import AsyncMercadoLibrePlatform
-from scrapers.implementations.platforms.magalu_platform import AsyncMagaluPlatform
+from scrapers.platforms.amazon_platform import AsyncAmazonPlatform
+from scrapers.platforms.mercado_libre_platform import AsyncMercadoLibrePlatform
+from scrapers.platforms.magalu_platform import AsyncMagaluPlatform
 
 
 class PlatformFactory:
@@ -21,5 +21,17 @@ class PlatformFactory:
 
         if platform == Platform.MERCADOLIVRE:
             return AsyncMercadoLibrePlatform(self.automation)
+
+        raise ValueError("Plataforma inválida")
+    
+    def get_by_url(self, url: str):
+        if "amazon.com.br" in url:
+            return AsyncAmazonPlatform(self.automation)
+
+        if "mercadolivre.com.br" in url:
+            return AsyncMercadoLibrePlatform(self.automation)
+
+        if "magazineluiza.com.br" in url:
+            return AsyncMagaluPlatform(self.automation)
 
         raise ValueError("Plataforma inválida")

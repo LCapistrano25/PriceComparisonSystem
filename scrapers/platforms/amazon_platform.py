@@ -1,8 +1,8 @@
 from core.utils.logger import Log
-from scrapers.database.exceptions.exception import ExceptionModel
-from scrapers.database.price_collected import PriceCollected
-from scrapers.interfaces.base.automation import AsyncAutomationInterface
-from scrapers.interfaces.platforms.platform import AsyncPlatformInterface
+from scrapers.dto.exception import ExceptionModel
+from scrapers.dto.price_collected import PriceCollected
+from scrapers.interfaces.automation import AsyncAutomationInterface
+from scrapers.interfaces.platform import AsyncPlatformInterface
 
 from core.utils.format_values import parse_price
 
