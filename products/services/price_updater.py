@@ -1,10 +1,12 @@
-from core.utils.logger import Log
 from decimal import Decimal
+
 from django.utils import timezone
+from core.utils.logger import Log
 
 from asgiref.sync import sync_to_async
+
 from products.models import PriceHistory, ProductPlatform
-from services.price_parser import PriceParser
+from products.utils import parse_date
 
 class PriceUpdaterService:
 
@@ -18,7 +20,7 @@ class PriceUpdaterService:
             return
 
         price = data['price']
-        consult_date = PriceParser.parse_date(data['consult_date'])
+        consult_date = parse_date(data['consult_date'])
 
         if price == item.current_price:
             Log.info(f"Preço do item {item.id} mantido (sem alteração): {price}", __name__)
@@ -40,6 +42,7 @@ class PriceUpdaterService:
 
             await sync_to_async(item.save)()
             Log.info(f"Item {item.id} atualizado com sucesso no banco de dados", __name__)
+
         except Exception as e:
             Log.error(f"Erro ao salvar atualização do item {item.id} no banco: {str(e)}", __name__, exc_info=True)
             raise

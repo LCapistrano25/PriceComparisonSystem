@@ -4,7 +4,7 @@ from celery import shared_task
 
 @shared_task
 def scrape_product() -> None:
-    from services.price_collector import PriceCollectorService
+    from products.services.price_collector import PriceCollectorService
     
     Log.info("Celery Task: scrape_product iniciada", __name__)
     try:

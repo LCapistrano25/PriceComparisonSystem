@@ -1,12 +1,12 @@
 from core.utils.logger import Log
-from scrapers.database.exceptions.exception import ExceptionModel
-from scrapers.database.price_collected import PriceCollected
+from scrapers.dto.exception import ExceptionModel
+from scrapers.dto.price_collected import PriceCollected
 
-from scrapers.interfaces.base.automation import AsyncAutomationInterface
-from scrapers.interfaces.platforms.platform import AsyncPlatformInterface
+from scrapers.interfaces.automation import AsyncAutomationInterface
+from scrapers.interfaces.platform import AsyncPlatformInterface
 from core.utils.format_values import parse_price
 
-XPATH_CONTAINER = "//span[contains(@class, 'ui-pdp-price__part__container')]"
+XPATH_CONTAINER = "//div[contains(@class, 'ui-pdp-price__second-line')]//span[contains(@class, 'ui-pdp-price__part__container')]"
 
 class AsyncMercadoLibrePlatform(AsyncPlatformInterface):
     def __init__(self, automation: AsyncAutomationInterface):
